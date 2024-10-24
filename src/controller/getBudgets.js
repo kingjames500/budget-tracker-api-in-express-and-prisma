@@ -6,10 +6,14 @@ const getBudget = async (req, res) => {
   try {
     const title = req.params.title;
 
+    let whereClause = {};
+
+    if(title !== undefined || title !== null) {
+      whereClause.title = title;
+    }
+
     const budget = await client.budget.findUnique({
-      where: {
-        title,
-      },
+      where: whereClause
     });
 
     if (!budget) {
