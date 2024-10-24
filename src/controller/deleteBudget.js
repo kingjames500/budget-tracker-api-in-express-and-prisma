@@ -1,6 +1,6 @@
-import { Prisma } from "@prisma/client";
+import { PrismaClient } from "../imports/imports.js";
 
-const client = new Prisma();
+const client = new PrismaClient();
 
 const deleteBudget = async (req, res) => {
   try {
@@ -19,4 +19,3 @@ const deleteBudget = async (req, res) => {
 };
 
 export default deleteBudget;
-

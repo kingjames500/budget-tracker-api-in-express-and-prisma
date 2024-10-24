@@ -1,8 +1,8 @@
-import { Prisma } from "../imports/imports.js";
+import { PrismaClient } from "../imports/imports.js";
 
-const client = new Prisma();    
+const client = new PrismaClient();
 
-const CreateBudget = async (req, res) => {
+const createBudget = async (req, res) => {
   try {
     const { title, unitPrice, quantity } = req.body;
 
@@ -18,6 +18,6 @@ const CreateBudget = async (req, res) => {
   } catch (error) {
     res.status(400).send({ error: error.message });
   }
-}
+};
 
-export default CreateBudget;
+export default createBudget;

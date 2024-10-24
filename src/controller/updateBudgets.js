@@ -1,8 +1,6 @@
-import { Prisma } from "@prisma/client";
+import { PrismaClient } from "../imports/imports.js";
 
-const client = new Prisma();
-
-
+const client = new PrismaClient();
 
 const updateBudgets = async (req, res) => {
   const titleWanted = req.params.title;
@@ -34,6 +32,6 @@ const updateBudgets = async (req, res) => {
   } catch (error) {
     res.status(400).send({ error: error.message });
   }
-}
+};
 
 export default updateBudgets;

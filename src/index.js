@@ -1,12 +1,11 @@
 import express from "express";
-import { PrismaClient } from "@prisma/client";
+import budgetRouter from "./routes/budget.route.js";
 
 const app = express();
+
 app.use(express.json());
 
-const client = new PrismaClient();
-
-
+app.use("/budget", budgetRouter);
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");

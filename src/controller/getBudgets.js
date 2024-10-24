@@ -1,19 +1,24 @@
-import { Prisma } from "@prisma/client";
+import { PrismaClient } from "../imports/imports.js";
 
-const client = new Prisma();
+const client = new PrismaClient();
 
-const getBudgets = async (_req, res) => {
+const getBudget = async (req, res) => {
   try {
-    const budgets = await client.budget.findMany();
+    const title = req.params.title;
 
-    if (budgets.length === 0) {
-      res.status(404).json({ message: "No budgets found" });
-    } else {
-      res.status(200).send(budgets);
+    const budget = await client.budget.findUnique({
+      where: {
+        title,
+      },
+    });
+
+    if (!budget) {
+      return res.status(404).json({ message: "Budget not found" });
     }
+    res.status(200).send(budget);
   } catch (e) {
-    res.status(500).json({ message: "server error" });
+    return res.status(500).json({ message: "server error" });
   }
-}; 
+};
 
-export default getBudgets;
+export default getBudget;
